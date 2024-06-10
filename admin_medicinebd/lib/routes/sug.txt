@@ -1,0 +1,135 @@
+Visibility(
+                visible: _currentCategory != null,
+                child: InkWell(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(8.0, 8.0, 200, 8.0),
+                    child: Material(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.red,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Text(
+                                _currentCategory.toString(),
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                _currentCategory = null;
+                              });
+                            },
+                            icon: Icon(
+                              Icons.close,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                )),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TypeAheadField(
+                textFieldConfiguration: TextFieldConfiguration(
+                  autofocus: true,
+                  // style: DefaultTextStyle.of(context)
+                  //     .style
+                  //     .copyWith(fontStyle: FontStyle.italic, fontSize: 12),
+                  decoration: InputDecoration(hintText: "Add Category"),
+                ),
+                suggestionsCallback: (pattern) async {
+                  return await categoryService.getSuggestions(pattern);
+                },
+                itemBuilder: (context, suggestion) {
+                  return ListTile(
+                    leading: Icon(Icons.category),
+                    title: Text(suggestion['category']),
+                    // subtitle: Text('\$${suggestion['price']}'),
+                  );
+                },
+                onSuggestionSelected: (suggestion) {
+                  setState(() {
+                    _currentCategory = suggestion['category'];
+                  });
+                  // Navigator.of(context).push(MaterialPageRoute(
+                  //     builder: (context) => ProductPage(product: suggestion)));
+                },
+              ),
+            ),
+            //Select Brands
+            Visibility(
+                visible: _currentBrand != null,
+                child: InkWell(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(8.0, 8.0, 200, 8.0),
+                    child: Material(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.red,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Text(
+                                _currentBrand.toString(),
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                _currentBrand = null;
+                              });
+                            },
+                            icon: Icon(
+                              Icons.close,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                )),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TypeAheadField(
+                hideSuggestionsOnKeyboardHide: false,
+                textFieldConfiguration: TextFieldConfiguration(
+                  autofocus: true,
+                  // style: DefaultTextStyle.of(context)
+                  //     .style
+                  //     .copyWith(fontStyle: FontStyle.italic, fontSize: 12),
+                  decoration: InputDecoration(hintText: "Add Brand"),
+                ),
+                suggestionsCallback: (pattern) async {
+                  return await brandService.getSuggestions(pattern);
+                },
+                itemBuilder: (context, suggestion) {
+                  return Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: ListTile(
+                      leading: Icon(Icons.category),
+                      title: Text(suggestion['brand']),
+                      // subtitle: Text('\$${suggestion['price']}'),
+                    ),
+                  );
+                },
+                onSuggestionSelected: (suggestion) {
+                  setState(() {
+                    _currentBrand = suggestion['brand'];
+                  });
+                  // Navigator.of(context).push(MaterialPageRoute(
+                  //     builder: (context) => ProductPage(product: suggestion)));
+                },
+              ),
+            ),

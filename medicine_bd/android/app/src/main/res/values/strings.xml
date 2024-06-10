@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+<string name="app_name">Medic</string>
+<string name="facebook_app_id">521132156661545</string>
+<string name="fb_login_protocol_scheme">fb521132156661545</string>
+<string name="facebook_client_token">6cffa0511b253ea7e6f1b912de1f5287</string>
+</resources>
